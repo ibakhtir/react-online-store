@@ -1,0 +1,32 @@
+.btn:focus,
+.btn:active {
+  box-shadow: none !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #ffc107;
+  box-shadow: none !important;
+}
+
+.form-check-input:active,
+.form-check-input:checked {
+  border-color: #ffc107;
+  box-shadow: none !important;
+}
+
+.form-check-input:checked {
+  background-color: #ffc107;
+}
+
+.auth-container {
+  height: calc(100vh - 64px);
+}
+
+.auth-block {
+  width: 440px;
+}
+
+.dropdown-item:active {
+  background-color: #ffc107;
+}

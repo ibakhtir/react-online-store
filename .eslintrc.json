@@ -23,7 +23,7 @@
   },
   "plugins": ["react"],
   "rules": {
-    "indent": ["error", 2],
+    "indent": ["error", 2, { "SwitchCase": 1 }],
     "semi": ["error", "always"],
     "quotes": [
       "error",
@@ -35,6 +35,8 @@
       "error",
       { "anonymous": "always", "named": "never" }
     ],
+    "no-param-reassign": ["error", { "props": false }],
+    "no-shadow": ["off"],
     "import/order": [
       "error",
       {
@@ -60,6 +62,12 @@
           "function-expression",
           "arrow-function"
         ]
+      }
+    ],
+    "react/require-default-props": [
+      "error",
+      {
+        "ignoreFunctionalComponents": true
       }
     ]
   }

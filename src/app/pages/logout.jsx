@@ -1,5 +1,16 @@
-import React from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
-const Logout = () => <h1>Выход</h1>;
+import { signOut } from "../store/users";
 
-export default Logout;
+const LogOut = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(signOut());
+  }, [dispatch]);
+
+  return "Loading...";
+};
+
+export default LogOut;
