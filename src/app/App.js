@@ -1,25 +1,18 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import AppRouter from "./components/AppRouter";
-import { loadUsersList } from "./store/users";
 import NavBar from "./components/ui/navBar";
+import AppLoader from "./components/loaders/appLoader";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(loadUsersList());
-  }, [dispatch]);
-
   return (
-    <>
+    <AppLoader>
       <NavBar />
       <AppRouter />
       <ToastContainer />
-    </>
+    </AppLoader>
   );
 }
 
