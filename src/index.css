@@ -30,3 +30,11 @@
 .dropdown-item:active {
   background-color: #ffc107;
 }
+
+.item-img {
+  transition: all 0.3s linear;
+}
+
+.item-img:hover {
+  transform: scale(0.9);
+}

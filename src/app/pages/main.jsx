@@ -1,5 +1,7 @@
 import React from "react";
 
-const Main = () => <h1>Главная страница</h1>;
+import ItemsList from "../components/ui/itemsList";
+
+const Main = () => <ItemsList />;
 
 export default Main;
