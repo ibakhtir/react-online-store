@@ -38,3 +38,13 @@
 .item-img:hover {
   transform: scale(0.9);
 }
+
+.cart-items-block {
+  max-width: 768px;
+  min-width: 280px;
+}
+
+.cart-clear:hover {
+  color: #000;
+  cursor: pointer;
+}
