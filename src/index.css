@@ -27,6 +27,7 @@
   width: 440px;
 }
 
+.dropdown-item.active,
 .dropdown-item:active {
   background-color: #ffc107;
 }
@@ -46,5 +47,11 @@
 
 .cart-clear:hover {
   color: #000;
+}
+
+.cart-clear,
+.sort-menu,
+.dropdown-item,
+.list-group-item {
   cursor: pointer;
 }

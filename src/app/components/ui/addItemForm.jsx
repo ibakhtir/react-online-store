@@ -3,10 +3,14 @@ import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
 import validator from "../../utils/validator";
+import { getRandomInteger } from "../../utils/calculations";
 import TextField from "../forms/textField";
 import TextAreaField from "../forms/textAreaField";
 import SelectField from "../forms/selectField";
+import MultiSelectField from "../forms/multiSelectField";
 import { createItem } from "../../store/items";
+
+import { categories } from "./categories";
 
 const initialState = {
   name: "",
@@ -16,7 +20,8 @@ const initialState = {
   size: "",
   weight: "",
   calories: "",
-  price: ""
+  price: "",
+  categories: []
 };
 
 const doughTypes = [
@@ -31,6 +36,8 @@ const AddItemForm = ({ onClose }) => {
   const [isValid, setValid] = useState(true);
   const dispatch = useDispatch();
 
+  const multiSelectOptions = categories.filter((obj) => obj.value !== "0");
+
   const validate = useCallback(() => {
     const validatorConfig = {};
     Object.keys(data).map(
@@ -39,7 +46,6 @@ const AddItemForm = ({ onClose }) => {
           isRequired: { message: "Обязательное поле" }
         })
     );
-
     const errors = validator(data, validatorConfig);
     setErrors(errors);
     return Object.keys(errors).length === 0;
@@ -63,7 +69,13 @@ const AddItemForm = ({ onClose }) => {
     e.preventDefault();
     const isValid = validate();
     if (isValid) {
-      dispatch(createItem(data));
+      dispatch(
+        createItem({
+          ...data,
+          categories: data.categories.map((c) => c.value),
+          rating: getRandomInteger(1, 5)
+        })
+      );
       clearForm();
       onClose();
     } else {
@@ -102,6 +114,14 @@ const AddItemForm = ({ onClose }) => {
         value={data.dough}
         onChange={handleChange}
         error={errors.dough}
+      />
+      <MultiSelectField
+        defaultValue={data.categories}
+        options={multiSelectOptions}
+        label="Категории"
+        name="categories"
+        onChange={handleChange}
+        error={errors.categories}
       />
       <div className="row">
         <div className="col-sm-3">

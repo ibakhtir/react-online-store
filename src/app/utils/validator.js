@@ -5,8 +5,10 @@ function validate(method, data, config) {
     case "isRequired": {
       if (typeof data === "boolean") {
         statusValidate = !data;
+      } else if (Array.isArray(data)) {
+        statusValidate = data.length < 1;
       } else {
-        statusValidate = data.trim() === "";
+        statusValidate = String(data).trim() === "";
       }
       break;
     }

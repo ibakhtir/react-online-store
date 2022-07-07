@@ -12,7 +12,11 @@ const Table = ({ items, columns }) => (
 );
 
 Table.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+  items: PropTypes.arrayOf(
+    PropTypes.objectOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array])
+    )
+  ),
   columns: PropTypes.arrayOf(
     PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func]))
   )

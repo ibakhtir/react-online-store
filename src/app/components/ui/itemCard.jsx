@@ -62,7 +62,9 @@ const ItemCard = ({ item }) => {
 };
 
 ItemCard.propTypes = {
-  item: PropTypes.objectOf(PropTypes.string)
+  item: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array])
+  )
 };
 
 export default ItemCard;

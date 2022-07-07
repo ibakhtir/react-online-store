@@ -64,7 +64,7 @@ const CartItem = ({ item }) => {
 
 CartItem.propTypes = {
   item: PropTypes.objectOf(
-    PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array])
   )
 };
 

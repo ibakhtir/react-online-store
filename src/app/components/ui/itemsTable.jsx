@@ -76,7 +76,11 @@ const ItemsTable = ({ items, onRemove }) => {
 };
 
 ItemsTable.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+  items: PropTypes.arrayOf(
+    PropTypes.objectOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.array])
+    )
+  ),
   onRemove: PropTypes.func
 };
 
