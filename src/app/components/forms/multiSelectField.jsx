@@ -58,6 +58,7 @@ const MultiSelectField = ({
         isMulti
         name={name}
         defaultValue={defaultValue}
+        value={defaultValue}
         options={options}
         className="basic-multi-select"
         classNamePrefix="select"

@@ -29,9 +29,9 @@ const NavProfile = () => {
       <div
         className={`dropdown-menu ${
           isOpen ? "show" : ""
-        } position-absolute top-100 end-0 mt-3`}
+        } position-absolute top-100 end-0 mt-2`}
       >
-        <Link to={LOGOUT_ROUTE} className="dropdown-item my-1">
+        <Link to={LOGOUT_ROUTE} className="dropdown-item">
           Выйти
         </Link>
       </div>

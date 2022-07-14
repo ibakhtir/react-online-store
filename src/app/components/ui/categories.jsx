@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getCategory, setCategory } from "../../store/filter";
+import { getCategory, setCategory, setSearchValue } from "../../store/filter";
 
 export const categories = [
   { value: "0", label: "Все" },
@@ -14,11 +14,12 @@ export const categories = [
 ];
 
 const Categories = () => {
+  const categoryId = useSelector(getCategory());
   const dispatch = useDispatch();
-  const category = useSelector(getCategory());
 
   const handleChangeCategory = (categoryId) => {
     dispatch(setCategory(categoryId));
+    dispatch(setSearchValue(""));
   };
 
   return (
@@ -29,7 +30,7 @@ const Categories = () => {
             key={obj.value}
             aria-hidden="true"
             className={`list-group-item list-group-item-action list-group-item-warning text-center ${
-              obj.value === category ? "active" : ""
+              obj.value === categoryId ? "active" : ""
             }`}
             onClick={() => handleChangeCategory(obj.value)}
           >

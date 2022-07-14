@@ -110,6 +110,7 @@ export function loadItemsList() {
   };
 }
 
+export const getItemsLoadingStatus = () => (state) => state.items.isLoading;
 export const getItems = () => (state) => state.items.entities;
 
 export default itemsReducer;
