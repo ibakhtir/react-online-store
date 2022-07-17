@@ -9,7 +9,7 @@ import SelectField from "../forms/selectField";
 import MultiSelectField from "../forms/multiSelectField";
 import { updateItem } from "../../store/items";
 
-import { categories } from "./categories";
+import { categories } from "./filterGroup/categories";
 
 const doughTypes = [
   { id: "1", name: "Традиционное тесто" },

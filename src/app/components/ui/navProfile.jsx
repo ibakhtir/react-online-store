@@ -1,40 +1,30 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
+import useOnClickOutside from "../../hooks/useOnClickOutside";
 import { LOGOUT_ROUTE } from "../../utils/constants";
 
 const NavProfile = () => {
   const [isOpen, setOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef();
 
-  useEffect(() => {
-    const isClick = (e) => {
-      if (dropdownRef.current.contains(e.target)) {
-        setOpen((prevState) => !prevState);
-      } else {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("click", isClick);
-    return () => document.removeEventListener("click", isClick);
-  }, []);
+  useOnClickOutside(dropdownRef, () => setOpen(false));
 
   return (
     <button
+      ref={dropdownRef}
       type="button"
       className="dropdown btn btn-warning me-2 btn-sm position-relative"
-      ref={dropdownRef}
+      onClick={() => setOpen(!isOpen)}
     >
       <i className="bi bi-person" />
-      <div
-        className={`dropdown-menu ${
-          isOpen ? "show" : ""
-        } position-absolute top-100 end-0 mt-2`}
-      >
-        <Link to={LOGOUT_ROUTE} className="dropdown-item">
-          Выйти
-        </Link>
-      </div>
+      {isOpen && (
+        <div className="dropdown-menu show position-absolute top-100 end-0 mt-2">
+          <Link to={LOGOUT_ROUTE} className="dropdown-item">
+            Выйти
+          </Link>
+        </div>
+      )}
     </button>
   );
 };

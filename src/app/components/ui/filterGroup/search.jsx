@@ -6,7 +6,7 @@ import {
   getSearchValue,
   setSearchValue,
   setCategory
-} from "../../store/filter";
+} from "../../../store/filter";
 
 const Search = () => {
   const [value, setValue] = useState("");

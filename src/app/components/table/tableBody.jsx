@@ -2,12 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const TableBody = ({ items, columns }) => (
-  <tbody className="table-group-divider">
+  <tbody>
     {items &&
       items.map((item) => (
         <tr key={item.id}>
           {columns.map((el) => (
-            <td key={el.path}>{el.content(item)}</td>
+            <td key={el.path} className={el.style}>
+              {el.content(item)}
+            </td>
           ))}
         </tr>
       ))}
@@ -21,7 +23,9 @@ TableBody.propTypes = {
     )
   ),
   columns: PropTypes.arrayOf(
-    PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func]))
+    PropTypes.objectOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.func])
+    )
   )
 };
 

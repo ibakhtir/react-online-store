@@ -3,6 +3,8 @@ import { nanoid } from "nanoid";
 
 import itemService from "../services/item.service";
 
+import { setAlert } from "./alerts";
+
 const itemsSlice = createSlice({
   name: "items",
   initialState: {
@@ -66,6 +68,7 @@ export function createItem(payload) {
       };
       const { content } = await itemService.create(item);
       dispatch(itemCreated(content));
+      dispatch(setAlert({ content: "Новый товар добавлен", color: "success" }));
     } catch (error) {
       dispatch(itemCreateFailed(error.message));
     }
@@ -78,6 +81,7 @@ export function updateItem(payload) {
     try {
       const { content } = await itemService.update(payload);
       dispatch(itemUpdated(content));
+      dispatch(setAlert({ content: "Товар изменен", color: "warning" }));
     } catch (error) {
       dispatch(itemUpdateFailed(error.message));
     }
@@ -91,6 +95,7 @@ export function removeItem(itemId) {
       const { content } = await itemService.remove(itemId);
       if (content === null) {
         dispatch(itemRemoved(itemId));
+        dispatch(setAlert({ content: "Товар удален", color: "danger" }));
       }
     } catch (error) {
       dispatch(itemRemoveFailed(error.message));

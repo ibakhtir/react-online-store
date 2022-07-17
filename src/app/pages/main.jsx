@@ -2,11 +2,11 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { orderBy } from "lodash";
 
-import Categories from "../components/ui/categories";
-import Sort from "../components/ui/sort";
+import Categories from "../components/ui/filterGroup/categories";
+import Sort from "../components/ui/filterGroup/sort";
 import ItemCard from "../components/ui/itemCard";
 import Pagination from "../components/ui/pagination";
-import Footer from "../components/ui/footer";
+import Footer from "../components/common/footer";
 import { getItems, getItemsLoadingStatus } from "../store/items";
 import {
   getCategory,
@@ -14,13 +14,13 @@ import {
   getSortProperties
 } from "../store/filter";
 
+const pageSize = 4;
+
 const Main = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 4;
 
-  const items = useSelector(getItems());
   const isLoading = useSelector(getItemsLoadingStatus());
-
+  const items = useSelector(getItems());
   const categoryId = useSelector(getCategory());
   const { path, order } = useSelector(getSortProperties());
   const searchValue = useSelector(getSearchValue());

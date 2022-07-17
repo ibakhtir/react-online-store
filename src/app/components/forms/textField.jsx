@@ -13,7 +13,10 @@ const TextField = ({
   const getInputClasses = () => `form-control ${error ? "is-invalid" : ""}`;
 
   const handleChange = ({ target }) => {
-    onChange({ name: target.name, value: target.value });
+    onChange({
+      name: target.name,
+      value: type === "number" ? Number(target.value) : target.value
+    });
   };
 
   return (

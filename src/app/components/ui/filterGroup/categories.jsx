@@ -1,7 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getCategory, setCategory, setSearchValue } from "../../store/filter";
+import {
+  getCategory,
+  setCategory,
+  setSearchValue
+} from "../../../store/filter";
 
 export const categories = [
   { value: "0", label: "Все" },

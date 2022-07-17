@@ -13,7 +13,7 @@ import {
 } from "../../utils/constants";
 
 import NavProfile from "./navProfile";
-import Search from "./search";
+import Search from "./filterGroup/search";
 
 const NavBar = () => {
   const [isOpen, setOpen] = useState(false);

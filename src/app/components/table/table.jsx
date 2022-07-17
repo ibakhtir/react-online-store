@@ -18,7 +18,9 @@ Table.propTypes = {
     )
   ),
   columns: PropTypes.arrayOf(
-    PropTypes.objectOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func]))
+    PropTypes.objectOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.func])
+    )
   )
 };
 
