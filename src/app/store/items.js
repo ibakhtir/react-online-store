@@ -115,7 +115,17 @@ export function loadItemsList() {
   };
 }
 
-export const getItemsLoadingStatus = () => (state) => state.items.isLoading;
-export const getItems = () => (state) => state.items.entities;
+export function getItemById(itemId) {
+  return (state) =>
+    state.items.entities && state.items.entities.find((i) => i.id === itemId);
+}
+
+export function getItemsLoadingStatus() {
+  return (state) => state.items.isLoading;
+}
+
+export function getItems() {
+  return (state) => state.items.entities;
+}
 
 export default itemsReducer;

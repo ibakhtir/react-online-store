@@ -38,6 +38,7 @@
     "no-return-assign": ["error", "except-parens"],
     "no-param-reassign": ["error", { "props": false }],
     "no-shadow": ["off"],
+    "radix": ["error", "as-needed"],
     "import/order": [
       "error",
       {

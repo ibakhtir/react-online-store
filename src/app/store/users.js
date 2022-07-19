@@ -16,7 +16,7 @@ import {
 
 const initialStateNotAuth = {
   entities: null,
-  isLoading: false,
+  isLoading: true,
   error: null,
   auth: null,
   isLoggedIn: false,
@@ -64,10 +64,8 @@ const usersSlice = createSlice({
       state.entities.push(action.payload);
     },
     userLoggedOut: (state) => {
-      state.entities = null;
       state.isLoggedIn = false;
       state.auth = null;
-      state.dataLoaded = false;
     },
     authRequested: (state) => {
       state.error = null;
@@ -174,6 +172,21 @@ export function loadUsersList() {
   };
 }
 
-export const getIsLoggedIn = () => (state) => state.users.isLoggedIn;
+export function getUserById(userId) {
+  return (state) =>
+    state.users.entities && state.users.entities.find((u) => u.id === userId);
+}
+
+export function getCurrentUserId() {
+  return (state) => state.users?.auth?.userId;
+}
+
+export function getDataLoadedStatus() {
+  return (state) => state.users.dataLoaded;
+}
+
+export function getIsLoggedIn() {
+  return (state) => state.users.isLoggedIn;
+}
 
 export default usersReducer;

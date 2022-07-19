@@ -50,17 +50,19 @@ function validator(data, config) {
   const errors = {};
 
   Object.keys(data).forEach((fieldName) => {
-    Object.keys(config[fieldName]).forEach((method) => {
-      const error = validate(
-        method,
-        data[fieldName],
-        config[fieldName][method]
-      );
+    if (config[fieldName]) {
+      Object.keys(config[fieldName]).forEach((method) => {
+        const error = validate(
+          method,
+          data[fieldName],
+          config[fieldName][method]
+        );
 
-      if (error && !errors[fieldName]) {
-        errors[fieldName] = error;
-      }
-    });
+        if (error && !errors[fieldName]) {
+          errors[fieldName] = error;
+        }
+      });
+    }
   });
 
   return errors;
