@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import Badge from "../common/badge";
 import { getIsLoggedIn } from "../../store/users";
 import { getCartItems } from "../../store/cart";
 import { calcTotalCount } from "../../utils/calculations";
@@ -85,9 +86,11 @@ const NavBar = () => {
               >
                 <i className="bi bi-cart" />
                 {totalCount > 0 && (
-                  <span className="badge rounded-pill text-bg-danger position-absolute top-0 start-100 translate-middle">
-                    {totalCount}
-                  </span>
+                  <Badge
+                    data={totalCount}
+                    color="danger"
+                    rest="rounded-pill position-absolute top-0 start-100 translate-middle"
+                  />
                 )}
               </Link>
             </div>

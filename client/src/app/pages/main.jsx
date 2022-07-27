@@ -21,7 +21,7 @@ const Main = () => {
 
   const isLoading = useSelector(getItemsLoadingStatus());
   const items = useSelector(getItems());
-  const categoryId = useSelector(getCategory());
+  const category = useSelector(getCategory());
   const { path, order } = useSelector(getSortProperties());
   const searchValue = useSelector(getSearchValue());
 
@@ -38,16 +38,16 @@ const Main = () => {
     return data;
   }
 
-  function getFilteredItems(data, categoryId) {
-    if (categoryId !== "0") {
-      return data.filter((obj) => obj.categories.includes(categoryId));
+  function getFilteredItems(data, category) {
+    if (category.name !== "Все") {
+      return data.filter((obj) => obj.categories.includes(category._id));
     }
     return data;
   }
 
   const filteredItems = searchValue
     ? getSearchItems(items, searchValue)
-    : getFilteredItems(items, categoryId);
+    : getFilteredItems(items, category);
 
   const sortedItems = orderBy(filteredItems, [path], [order]);
 
@@ -83,7 +83,7 @@ const Main = () => {
             <div className="container">
               <div className="row">
                 {currentItems.map((item) => (
-                  <ItemCard key={item.id} item={item} />
+                  <ItemCard key={item._id} item={item} />
                 ))}
               </div>
             </div>

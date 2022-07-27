@@ -4,11 +4,11 @@ import { orderBy } from "lodash";
 
 import Alert from "../components/common/alert";
 import Modal from "../components/common/modal";
-import ItemsTable from "../components/ui/itemsTable";
 import Pagination from "../components/common/pagination";
+import ItemsTable from "../components/ui/itemsTable";
 import { getItems, getItemsLoadingStatus, removeItem } from "../store/items";
 import { getTableSortProperties } from "../store/filter";
-import { getAlert, setAlert } from "../store/alerts";
+import { getItemAlert, setItemAlert } from "../store/alerts";
 
 const pageSize = 4;
 
@@ -19,7 +19,7 @@ const Admin = () => {
   const isLoading = useSelector(getItemsLoadingStatus());
   const items = useSelector(getItems());
   const { path, order } = useSelector(getTableSortProperties());
-  const alert = useSelector(getAlert());
+  const alert = useSelector(getItemAlert());
 
   const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ const Admin = () => {
       setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
-        dispatch(setAlert({}));
+        dispatch(setItemAlert({}));
       }, 3000);
     };
     if (Object.keys(alert).length > 0) {
@@ -64,7 +64,7 @@ const Admin = () => {
       <div className="d-flex justify-content-start align-items-center mb-3">
         <Modal />
       </div>
-      {!isLoading && (
+      {currentItems.length > 0 && (
         <>
           <ItemsTable items={currentItems} onRemove={handleRemoveItem} />
           <Pagination

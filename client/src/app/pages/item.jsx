@@ -1,14 +1,26 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Comments from "../components/ui/comments";
+import ItemInfo from "../components/ui/itemInfo";
 import { getItemById } from "../store/items";
+import { addItem } from "../store/cart";
 
 const Item = () => {
   const { itemId } = useParams();
 
   const item = useSelector(getItemById(itemId));
+
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    const cartItem = {
+      ...item,
+      count: 1
+    };
+    dispatch(addItem(cartItem));
+  };
 
   return (
     item && (
@@ -22,6 +34,14 @@ const Item = () => {
               className="img-fluid my-2"
             />
             <h4 className="mt-2">{item.name}</h4>
+            <ItemInfo item={item} />
+            <button
+              type="button"
+              className="btn btn-dark text-warning w-75"
+              onClick={handleClick}
+            >
+              Добавить
+            </button>
           </div>
           <div className="col-md-8">
             <Comments />

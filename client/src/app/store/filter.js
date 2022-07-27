@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   searchValue: "",
-  category: "0",
+  category: { _id: "62d82150fa9f3bce7c9a6533", name: "Все" },
   sort: { name: "самые популярные", path: "rating", order: "desc" },
   tableSort: { path: "name", order: "asc" }
 };

@@ -80,7 +80,7 @@ const ItemsTable = ({ items, onRemove }) => {
           <button
             type="button"
             className="btn btn-danger btn-sm ms-2"
-            onClick={() => onRemove(item.id)}
+            onClick={() => onRemove(item._id)}
           >
             <i className="bi bi-trash" />
           </button>

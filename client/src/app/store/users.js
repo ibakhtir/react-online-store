@@ -3,7 +3,6 @@ import { toast } from "react-toastify";
 
 import { MAIN_ROUTE } from "../utils/constants";
 import generateAuthErrors from "../utils/generateAuthErrors";
-import createAvatar from "../utils/createAvatar";
 import history from "../utils/history";
 import userService from "../services/user.service";
 import authService from "../services/auth.service";
@@ -85,36 +84,15 @@ const {
 } = actions;
 
 const authRequested = createAction("users/authRequested");
-const userCreateRequested = createAction("users/userCreateRequested");
-const userCreateFailed = createAction("users/userCreateFailed");
 
-function createUser(payload) {
-  return async (dispatch) => {
-    dispatch(userCreateRequested());
-    try {
-      const { content } = await userService.create(payload);
-      dispatch(userCreated(content));
-    } catch (error) {
-      dispatch(userCreateFailed(error.message));
-    }
-  };
-}
-
-export function signUp({ email, password, ...rest }) {
+export function signUp(payload) {
   return async (dispatch) => {
     dispatch(authRequested());
     try {
-      const data = await authService.register({ email, password });
-      setTokens(data);
-      dispatch(authRequestSuccessed({ userId: data.localId }));
-      dispatch(
-        createUser({
-          id: data.localId,
-          email,
-          image: createAvatar("croodles-neutral"),
-          ...rest
-        })
-      );
+      const data = await authService.register(payload);
+      setTokens(data.tokenData);
+      dispatch(authRequestSuccessed({ userId: data.tokenData.userId }));
+      dispatch(userCreated(data.newUser));
       history.push(MAIN_ROUTE);
     } catch (error) {
       const { code, message } = error.response.data.error;
@@ -136,7 +114,7 @@ export function signIn({ email, password }) {
     try {
       const data = await authService.login({ email, password });
       setTokens(data);
-      dispatch(authRequestSuccessed({ userId: data.localId }));
+      dispatch(authRequestSuccessed({ userId: data.userId }));
       history.push(MAIN_ROUTE);
     } catch (error) {
       const { code, message } = error.response.data.error;
@@ -174,7 +152,7 @@ export function loadUsersList() {
 
 export function getUserById(userId) {
   return (state) =>
-    state.users.entities && state.users.entities.find((u) => u.id === userId);
+    state.users.entities && state.users.entities.find((u) => u._id === userId);
 }
 
 export function getCurrentUserId() {

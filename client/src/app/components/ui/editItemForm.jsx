@@ -1,30 +1,29 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
-import validator from "../../utils/validator";
 import TextField from "../common/forms/textField";
 import TextAreaField from "../common/forms/textAreaField";
 import SelectField from "../common/forms/selectField";
 import MultiSelectField from "../common/forms/multiSelectField";
+import validator from "../../utils/validator";
+import getMultiSelectOptions from "../../utils/getMultiSelectOptions";
 import { updateItem } from "../../store/items";
+import { getCategories } from "../../store/categories";
 
-import { categories } from "./filterGroup/categories";
-
-const doughTypes = [
-  { id: "1", name: "Традиционное тесто" },
-  { id: "2", name: "Бездрожжевое тесто" },
-  { id: "3", name: "Слоеное тесто" }
-];
+import doughTypes from "../../api/doughTypes";
 
 const EditItemForm = ({ item, onClose }) => {
   const [data, setData] = useState();
   const [errors, setErrors] = useState({});
   const [isValid, setValid] = useState(true);
   const [isLoading, setLoading] = useState(true);
+
+  const categories = useSelector(getCategories());
+
   const dispatch = useDispatch();
 
-  const multiSelectOptions = categories.filter((obj) => obj.value !== "0");
+  const multiSelectOptions = getMultiSelectOptions(categories);
 
   useEffect(() => {
     if (data && isLoading) {
@@ -36,7 +35,7 @@ const EditItemForm = ({ item, onClose }) => {
     const transformData = () => {
       const newData = [];
       item.categories.map((categoryId) =>
-        categories.forEach((obj) => {
+        getMultiSelectOptions(categories).forEach((obj) => {
           if (categoryId === obj.value) {
             newData.push(obj);
           }
@@ -48,7 +47,7 @@ const EditItemForm = ({ item, onClose }) => {
       ...item,
       categories: transformData()
     });
-  }, [item]);
+  }, [categories, item]);
 
   const validate = useCallback(() => {
     const validatorConfig = {};

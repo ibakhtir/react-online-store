@@ -22,7 +22,7 @@ const Search = () => {
   const updateSearchValue = debounce((str) => {
     dispatch(setSearchValue(str));
     if (str) {
-      dispatch(setCategory("0"));
+      dispatch(setCategory({ _id: "62d82150fa9f3bce7c9a6533", name: "Все" }));
     }
   }, 250);
 

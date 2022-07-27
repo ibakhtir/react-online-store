@@ -5,7 +5,7 @@ const TableBody = ({ items, columns }) => (
   <tbody>
     {items &&
       items.map((item) => (
-        <tr key={item.id}>
+        <tr key={item._id}>
           {columns.map((el) => (
             <td key={el.path} className={el.style}>
               {el.content(item)}

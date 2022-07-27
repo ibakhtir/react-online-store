@@ -23,23 +23,34 @@
   },
   "plugins": ["react"],
   "rules": {
+    // Отступы
     "indent": ["error", 2, { "SwitchCase": 1 }],
+    // Точка с запятой
     "semi": ["error", "always"],
+    // Кавычки
     "quotes": [
       "error",
       "double",
       { "allowTemplateLiterals": true, "avoidEscape": true }
     ],
+    // Многострочные тернарные выражения
     "multiline-ternary": ["off"],
+    // Нижнее подчеркивание
     "no-underscore-dangle": ["off"],
+    // Отступы перед аргументами функции
     "space-before-function-paren": [
       "error",
       { "anonymous": "always", "named": "never" }
     ],
+    // Присвоение в return
     "no-return-assign": ["error", "except-parens"],
+    // Переназначение параметров функции
     "no-param-reassign": ["error", { "props": false }],
+    // Одинаковые названия переменных в разных областях видимости
     "no-shadow": ["off"],
+    // Второй аргумент для parseInt()
     "radix": ["error", "as-needed"],
+    // Порядок импортов
     "import/order": [
       "error",
       {
@@ -56,7 +67,9 @@
         "newlines-between": "always-and-inside-groups"
       }
     ],
+    // Использование js и jsx в одном файле
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    // Тип функционального компонента
     "react/function-component-definition": [
       "error",
       {
@@ -67,12 +80,14 @@
         ]
       }
     ],
+    // Значение по умолчанию для необязательных параметров компонента
     "react/require-default-props": [
       "error",
       {
         "ignoreFunctionalComponents": true
       }
     ],
+    // Создание компонентов внутри компонентов
     "react/no-unstable-nested-components": ["error", { "allowAsProps": true }]
   }
 }

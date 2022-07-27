@@ -1,9 +1,9 @@
-function correctData(data) {
-  return String(data).length < 2 ? `0${data}` : data;
+function correctDate(date) {
+  return String(date).length < 2 ? `0${date}` : date;
 }
 
 export default function displayDate(data) {
-  const date = new Date(parseInt(data));
+  const date = new Date(data);
   const dateNow = new Date();
   const yearDif = dateNow.getFullYear() - date.getFullYear();
 
@@ -20,8 +20,8 @@ export default function displayDate(data) {
         }
         return "30 минут назад";
       }
-      const minutes = correctData(date.getMinutes());
-      const hours = correctData(date.getHours());
+      const minutes = correctDate(date.getMinutes());
+      const hours = correctDate(date.getHours());
       return `${hours}:${minutes}`;
     }
     const month = date.toLocaleString("default", { month: "long" });
@@ -31,7 +31,7 @@ export default function displayDate(data) {
         : `${month.slice(0, -1)}я`;
     return `${date.getDate()} ${correctMonth}`;
   }
-  const days = correctData(date.getDate());
-  const month = correctData(date.getMonth() + 1);
+  const days = correctDate(date.getDate());
+  const month = correctDate(date.getMonth() + 1);
   return `${days}.${month}.${date.getFullYear()}`;
 }

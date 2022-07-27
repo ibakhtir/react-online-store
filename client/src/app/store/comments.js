@@ -1,5 +1,4 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
-import { nanoid } from "nanoid";
 
 import commentService from "../services/comment.service";
 
@@ -31,7 +30,7 @@ const commentsSlice = createSlice({
       state.entities.push(action.payload);
     },
     commentRemoved: (state, action) => {
-      state.entities = state.entities.filter((c) => c.id !== action.payload);
+      state.entities = state.entities.filter((c) => c._id !== action.payload);
     }
   }
 });
@@ -52,14 +51,9 @@ const commentRemoveFailed = createAction("comments/commentRemoveFailed");
 
 export function createComment(payload) {
   return async (dispatch) => {
-    dispatch(commentCreateRequested(payload));
+    dispatch(commentCreateRequested());
     try {
-      const comment = {
-        ...payload,
-        id: nanoid(),
-        created_at: Date.now()
-      };
-      const { content } = await commentService.create(comment);
+      const { content } = await commentService.create(payload);
       dispatch(commentCreated(content));
     } catch (error) {
       dispatch(commentCreateFailed(error.message));
@@ -69,10 +63,10 @@ export function createComment(payload) {
 
 export function removeComment(commentId) {
   return async (dispatch) => {
-    dispatch(commentRemoveRequested(commentId));
+    dispatch(commentRemoveRequested());
     try {
       const { content } = await commentService.remove(commentId);
-      if (content === null) {
+      if (!content) {
         dispatch(commentRemoved(commentId));
       }
     } catch (error) {

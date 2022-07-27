@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
 
+import Badge from "../common/badge";
 import Counter from "../common/counter";
 import { addItem } from "../../store/cart";
 
 const ItemCard = ({ item }) => {
-  const { id, name, description, imageUrl, price } = item;
+  const { _id, name, description, imageUrl, price } = item;
+
   const [counter, setCounter] = useState(1);
+
   const dispatch = useDispatch();
 
   const handleIncrement = () => {
@@ -30,15 +33,17 @@ const ItemCard = ({ item }) => {
   return (
     <div className="col-xl-3 col-lg-4 col-md-6 my-2">
       <div className="d-flex flex-column h-100">
-        <Link to={`/item/${id}`}>
+        <Link to={`/item/${_id}`}>
           <img src={imageUrl} className="item-img img-fluid p-2" alt={name} />
         </Link>
         <div className="d-flex justify-content-around align-items-center">
           <h4>{name}</h4>
           <h4>
-            <span className="badge bg-dark fw-normal text-warning">
-              {`${price} ₴`}
-            </span>
+            <Badge
+              data={`${price} ₴`}
+              color="dark"
+              rest="fw-normal text-warning"
+            />
           </h4>
         </div>
         <p className="fst-italic p-2">{description}</p>

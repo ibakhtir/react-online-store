@@ -7,7 +7,7 @@ const commentRouter = express.Router({ mergeParams: true });
 
 commentRouter
   .route("/")
-  .get(authMiddleware, async (req, res) => {
+  .get(async (req, res) => {
     try {
       const { orderBy, equalTo } = req.query;
       const list = await Comment.find({ [orderBy]: equalTo });
@@ -24,6 +24,7 @@ commentRouter
         ...req.body,
         userId: req.user._id
       });
+
       res.status(201).send(newComment);
     } catch (error) {
       res

@@ -83,8 +83,16 @@ const MultiSelectField = ({
 };
 
 MultiSelectField.propTypes = {
-  defaultValue: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
-  options: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+  defaultValue: PropTypes.arrayOf(
+    PropTypes.objectOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    )
+  ),
+  options: PropTypes.arrayOf(
+    PropTypes.objectOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    )
+  ),
   label: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,

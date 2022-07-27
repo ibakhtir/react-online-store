@@ -1,17 +1,18 @@
 import { createAction, createSlice } from "@reduxjs/toolkit";
-import { nanoid } from "nanoid";
 
 import itemService from "../services/item.service";
 
-import { setAlert } from "./alerts";
+import { setItemAlert } from "./alerts";
+
+const initialState = {
+  entities: null,
+  isLoading: true,
+  error: null
+};
 
 const itemsSlice = createSlice({
   name: "items",
-  initialState: {
-    entities: null,
-    isLoading: true,
-    error: null
-  },
+  initialState,
   reducers: {
     itemsRequested: (state) => {
       state.isLoading = true;
@@ -32,11 +33,11 @@ const itemsSlice = createSlice({
     },
     itemUpdated: (state, action) => {
       state.entities[
-        state.entities.findIndex((i) => i.id === action.payload.id)
+        state.entities.findIndex((i) => i._id === action.payload._id)
       ] = action.payload;
     },
     itemRemoved: (state, action) => {
-      state.entities = state.entities.filter((i) => i.id !== action.payload);
+      state.entities = state.entities.filter((i) => i._id !== action.payload);
     }
   }
 });
@@ -60,15 +61,13 @@ const itemRemoveFailed = createAction("items/itemRemoveFailed");
 
 export function createItem(payload) {
   return async (dispatch) => {
-    dispatch(itemCreateRequested(payload));
+    dispatch(itemCreateRequested());
     try {
-      const item = {
-        ...payload,
-        id: nanoid()
-      };
-      const { content } = await itemService.create(item);
+      const { content } = await itemService.create(payload);
       dispatch(itemCreated(content));
-      dispatch(setAlert({ content: "Новый товар добавлен", color: "success" }));
+      dispatch(
+        setItemAlert({ content: "Новый товар добавлен", color: "success" })
+      );
     } catch (error) {
       dispatch(itemCreateFailed(error.message));
     }
@@ -77,11 +76,11 @@ export function createItem(payload) {
 
 export function updateItem(payload) {
   return async (dispatch) => {
-    dispatch(itemUpdateRequested(payload));
+    dispatch(itemUpdateRequested());
     try {
       const { content } = await itemService.update(payload);
       dispatch(itemUpdated(content));
-      dispatch(setAlert({ content: "Товар изменен", color: "warning" }));
+      dispatch(setItemAlert({ content: "Товар изменен", color: "warning" }));
     } catch (error) {
       dispatch(itemUpdateFailed(error.message));
     }
@@ -90,12 +89,12 @@ export function updateItem(payload) {
 
 export function removeItem(itemId) {
   return async (dispatch) => {
-    dispatch(itemRemoveRequested(itemId));
+    dispatch(itemRemoveRequested());
     try {
       const { content } = await itemService.remove(itemId);
-      if (content === null) {
+      if (!content) {
         dispatch(itemRemoved(itemId));
-        dispatch(setAlert({ content: "Товар удален", color: "danger" }));
+        dispatch(setItemAlert({ content: "Товар удален", color: "danger" }));
       }
     } catch (error) {
       dispatch(itemRemoveFailed(error.message));
@@ -115,13 +114,13 @@ export function loadItemsList() {
   };
 }
 
-export function getItemById(itemId) {
-  return (state) =>
-    state.items.entities && state.items.entities.find((i) => i.id === itemId);
-}
-
 export function getItemsLoadingStatus() {
   return (state) => state.items.isLoading;
+}
+
+export function getItemById(itemId) {
+  return (state) =>
+    state.items.entities && state.items.entities.find((i) => i._id === itemId);
 }
 
 export function getItems() {

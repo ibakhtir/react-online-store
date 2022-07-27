@@ -7,7 +7,7 @@ import { getCurrentUserId, getUserById } from "../../../store/users";
 import { removeComment } from "../../../store/comments";
 
 const Comment = ({ comment }) => {
-  const { id, content, created_at: created, userId, isRecommend } = comment;
+  const { _id, content, createdAt, userId, isRecommend } = comment;
 
   const currentUserId = useSelector(getCurrentUserId());
   const user = useSelector(getUserById(userId));
@@ -15,7 +15,7 @@ const Comment = ({ comment }) => {
   const dispatch = useDispatch();
 
   const handleRemoveComment = () => {
-    dispatch(removeComment(id));
+    dispatch(removeComment(_id));
   };
 
   return (
@@ -34,7 +34,7 @@ const Comment = ({ comment }) => {
               <p className="mb-0">
                 {user.name}
                 <span className="small text-muted">
-                  {` - ${displayDate(created)}`}
+                  {` - ${displayDate(createdAt)}`}
                 </span>
               </p>
               {currentUserId === userId && (

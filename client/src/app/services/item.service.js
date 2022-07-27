@@ -9,13 +9,13 @@ const itemService = {
   },
 
   create: async (payload) => {
-    const { data } = await httpService.put(itemEndpoint + payload.id, payload);
+    const { data } = await httpService.post(itemEndpoint, payload);
     return data;
   },
 
   update: async (payload) => {
     const { data } = await httpService.patch(
-      itemEndpoint + payload.id,
+      itemEndpoint + payload._id,
       payload
     );
     return data;

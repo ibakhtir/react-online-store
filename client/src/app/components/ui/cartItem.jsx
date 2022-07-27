@@ -6,7 +6,8 @@ import Counter from "../common/counter";
 import { plusItem, minusItem, removeItem } from "../../store/cart";
 
 const CartItem = ({ item }) => {
-  const { id, name, imageUrl, size, price, count } = item;
+  const { _id, name, imageUrl, size, price, count } = item;
+
   const dispatch = useDispatch();
 
   const handleClickPlus = () => {
@@ -18,7 +19,7 @@ const CartItem = ({ item }) => {
   };
 
   const handleClickRemove = () => {
-    dispatch(removeItem(id));
+    dispatch(removeItem(_id));
   };
 
   return (

@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getCartItems, getTotalPrice, clearItems } from "../store/cart";
 import { calcTotalCount } from "../utils/calculations";
-import CartItem from "../components/ui/cartItem";
+import Badge from "../components/common/badge";
 import BackButton from "../components/common/backButton";
+import CartItem from "../components/ui/cartItem";
 import CartEmpty from "../components/ui/cartEmpty";
 
 const ShoppingCart = () => {
@@ -41,15 +42,17 @@ const ShoppingCart = () => {
             </span>
           </div>
           {cartItems.map((item) => (
-            <CartItem key={item.id} item={item} />
+            <CartItem key={item._id} item={item} />
           ))}
           <div className="row border-top m-0 mb-2 p-3">
             <p className="col-md-6 lead fw-normal text-center mb-2">
               Сумма заказа:{" "}
               <span className="fw-bold text-warning">{`${totalPrice} ₴`}</span>{" "}
-              <span className="badge rounded-pill text-bg-light ms-1">
-                {`${totalCount} шт.`}
-              </span>
+              <Badge
+                data={`${totalCount} шт.`}
+                color="light"
+                rest="rounded-pill ms-1"
+              />
             </p>
             <div className="col-md-6 text-center">
               <button type="button" className="btn btn-warning w-100">

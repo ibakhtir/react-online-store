@@ -1,24 +1,21 @@
 import axios from "axios";
 
+import config from "../config.json";
+
 import { getRefreshToken } from "./localStorage.service";
 
 const httpAuth = axios.create({
-  baseURL: "https://identitytoolkit.googleapis.com/v1/",
-  params: { key: "AIzaSyAnas2_MjPHdssUQvwS07V5dvNIhoQlots" }
+  baseURL: `${config.apiEndpoint}/auth/`
 });
 
 const authService = {
-  register: async ({ email, password }) => {
-    const { data } = await httpAuth.post(`accounts:signUp`, {
-      email,
-      password,
-      returnSecureToken: true
-    });
+  register: async (payload) => {
+    const { data } = await httpAuth.post("signUp", payload);
     return data;
   },
 
   login: async ({ email, password }) => {
-    const { data } = await httpAuth.post(`accounts:signInWithPassword`, {
+    const { data } = await httpAuth.post("signInWithPassword", {
       email,
       password,
       returnSecureToken: true

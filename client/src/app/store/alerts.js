@@ -1,22 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  alert: {}
+  itemAlert: {}
 };
 
 const alertsSlice = createSlice({
   name: "alerts",
   initialState,
   reducers: {
-    setAlert(state, action) {
-      state.alert = action.payload;
+    setItemAlert(state, action) {
+      state.itemAlert = action.payload;
     }
   }
 });
 
 const { reducer: alertsReducer, actions } = alertsSlice;
-export const { setAlert } = actions;
+export const { setItemAlert } = actions;
 
-export const getAlert = () => (state) => state.alerts.alert;
+export const getItemAlert = () => (state) => state.alerts.itemAlert;
 
 export default alertsReducer;

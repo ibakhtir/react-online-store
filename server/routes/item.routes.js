@@ -1,6 +1,7 @@
 const express = require("express");
 
 const Item = require("../models/Item");
+const { getRandomInteger } = require("../utils/helpers");
 
 const itemRouter = express.Router({ mergeParams: true });
 
@@ -19,9 +20,11 @@ itemRouter
   .post(async (req, res) => {
     try {
       const newItem = await Item.create({
-        ...req.body
+        ...req.body,
+        rating: getRandomInteger(1, 5)
       });
-      req.status(201).send(newItem);
+
+      res.status(201).send(newItem);
     } catch (error) {
       res
         .status(500)
@@ -34,10 +37,12 @@ itemRouter
   .patch(async (req, res) => {
     try {
       const { itemId } = req.params;
+
       const updatedItem = await Item.findByIdAndUpdate(itemId, req.body, {
         new: true
       });
-      req.status(200).send(updatedItem);
+
+      res.status(200).send(updatedItem);
     } catch (error) {
       res
         .status(500)

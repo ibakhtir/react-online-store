@@ -42,9 +42,7 @@ export function loadCategoriesList() {
   };
 }
 
-export function getCategories() {
-  return (state) => state.categories.entities;
-}
+export const getCategories = () => (state) => state.categories.entities;
 
 export function getCategoriesById(categoriesIds) {
   return (state) => {

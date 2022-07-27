@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import App from "./app/App";
 import createStore from "./app/store/createStore";
 import history from "./app/utils/history";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "./index.css";
 

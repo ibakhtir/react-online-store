@@ -2,9 +2,9 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import validator from "../../../utils/validator";
 import TextAreaField from "../forms/textAreaField";
 import RadioField from "../forms/radioField";
+import validator from "../../../utils/validator";
 import { getCurrentUserId } from "../../../store/users";
 import { createComment } from "../../../store/comments";
 
@@ -21,7 +21,7 @@ const AddCommentForm = () => {
 
   const dispatch = useDispatch();
 
-  const getDisabledForm = () => {
+  const setDisabledForm = () => {
     if (currentUserId === undefined || currentUserId === null) {
       return true;
     }
@@ -70,13 +70,13 @@ const AddCommentForm = () => {
   };
 
   return (
-    <div className="card">
+    <div className="card mb-2">
       <div className="card-body">
         <h3>Оставить отзыв</h3>
         <hr />
         <div className="bg-light rounded p-2">
           <form onSubmit={handleSubmit}>
-            <fieldset disabled={getDisabledForm()}>
+            <fieldset disabled={setDisabledForm()}>
               <TextAreaField
                 name="content"
                 value={data.content}

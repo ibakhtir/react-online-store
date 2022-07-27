@@ -5,7 +5,7 @@ const authMiddleware = require("../middleware/auth.middleware");
 
 const userRouter = express.Router({ mergeParams: true });
 
-userRouter.get("/", authMiddleware, async (req, res) => {
+userRouter.get("/", async (req, res) => {
   try {
     const list = await User.find();
     res.status(200).send(list);
@@ -24,6 +24,7 @@ userRouter.patch("/:userId", authMiddleware, async (req, res) => {
       const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
         new: true
       });
+
       res.status(200).send(updatedUser);
     } else {
       res.status(401).json({ message: "Unauthorized" });

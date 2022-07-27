@@ -18,13 +18,13 @@ const Comments = () => {
     dispatch(loadCommentsList(itemId));
   }, [dispatch, itemId]);
 
-  const sortedComments = orderBy(comments, ["created_at"], ["desc"]);
+  const sortedComments = orderBy(comments, ["createdAt"], ["desc"]);
 
   return (
-    <>
+    <div className="px-3">
       <AddCommentForm />
       {sortedComments.length > 0 && <CommentsList comments={sortedComments} />}
-    </>
+    </div>
   );
 };
 
