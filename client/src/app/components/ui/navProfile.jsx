@@ -1,10 +1,11 @@
 import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import useOnClickOutside from "../../hooks/useOnClickOutside";
 import { LOGOUT_ROUTE } from "../../utils/constants";
 
-const NavProfile = () => {
+const NavProfile = ({ isNavBarCollapsed }) => {
   const [isOpen, setOpen] = useState(false);
   const dropdownRef = useRef();
 
@@ -19,7 +20,11 @@ const NavProfile = () => {
     >
       <i className="bi bi-person" />
       {isOpen && (
-        <div className="dropdown-menu show position-absolute top-100 end-0 mt-2">
+        <div
+          className={`dropdown-menu show position-absolute top-100 ${
+            isNavBarCollapsed ? "start-0" : "end-0"
+          } mt-2`}
+        >
           <Link to={LOGOUT_ROUTE} className="dropdown-item">
             Выйти
           </Link>
@@ -27,6 +32,10 @@ const NavProfile = () => {
       )}
     </button>
   );
+};
+
+NavProfile.propTypes = {
+  isNavBarCollapsed: PropTypes.bool
 };
 
 export default NavProfile;

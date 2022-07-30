@@ -1,12 +1,15 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
+import Preloader from "../preloader";
 import { loadUsersList } from "../../../store/users";
-import { loadItemsList } from "../../../store/items";
+import { loadItemsList, getItemsLoadingStatus } from "../../../store/items";
 import { loadCategoriesList } from "../../../store/categories";
 
 const AppLoader = ({ children }) => {
+  const itemsLoadingStatus = useSelector(getItemsLoadingStatus());
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -15,6 +18,8 @@ const AppLoader = ({ children }) => {
     dispatch(loadCategoriesList());
   }, [dispatch]);
 
+  if (itemsLoadingStatus)
+    return <Preloader color="warning" loaderHeight="100vh" />;
   return children;
 };
 

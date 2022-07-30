@@ -32,7 +32,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="container py-2">
+    <div className="container bg-white sticky-top py-2">
       <nav className="navbar navbar-expand-md navbar-dark bg-dark rounded">
         <div className="container-fluid">
           <Link
@@ -69,7 +69,7 @@ const NavBar = () => {
                 </Link>
               )}
               {isLoggedIn ? (
-                <NavProfile />
+                <NavProfile isNavBarCollapsed={isOpen} />
               ) : (
                 <Link
                   to={LOGIN_ROUTE}

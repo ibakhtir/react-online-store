@@ -5,12 +5,17 @@ import { orderBy } from "lodash";
 
 import CommentsList from "../common/comments/commentsList";
 import AddCommentForm from "../common/comments/addCommentForm";
-import { getComments, loadCommentsList } from "../../store/comments";
+import {
+  getComments,
+  getCommentsLoadingStatus,
+  loadCommentsList
+} from "../../store/comments";
 
 const Comments = () => {
   const { itemId } = useParams();
 
   const comments = useSelector(getComments());
+  const commentsLoadingStatus = useSelector(getCommentsLoadingStatus());
 
   const dispatch = useDispatch();
 
@@ -23,7 +28,12 @@ const Comments = () => {
   return (
     <div className="px-3">
       <AddCommentForm />
-      {sortedComments.length > 0 && <CommentsList comments={sortedComments} />}
+      {sortedComments.length > 0 && (
+        <CommentsList
+          comments={sortedComments}
+          isLoading={commentsLoadingStatus}
+        />
+      )}
     </div>
   );
 };

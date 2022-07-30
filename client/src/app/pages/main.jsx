@@ -13,8 +13,9 @@ import {
   getSearchValue,
   getSortProperties
 } from "../store/filter";
+import Slider from "../components/common/slider";
 
-const pageSize = 4;
+const pageSize = 8;
 
 const Main = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -71,11 +72,19 @@ const Main = () => {
     <>
       {!isLoading && (
         <div className="container">
-          <div className="row align-items-center p-3">
-            <div className="col-xl-8 text-start mb-3">
+          <Slider />
+          <div
+            className="row align-items-center sticky-top p-3"
+            style={{
+              top: "70px",
+              zIndex: 1,
+              background: "rgba(255,255,255, 0.9)"
+            }}
+          >
+            <div className="col-xl-8 text-start mb-2">
               <Categories />
             </div>
-            <div className="col-xl-4 text-end mb-3">
+            <div className="col-xl-4 text-end mb-2">
               <Sort />
             </div>
           </div>

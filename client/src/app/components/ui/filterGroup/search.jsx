@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { debounce } from "lodash";
 
+import useDebounce from "../../../hooks/useDebounce";
 import {
   getSearchValue,
   setSearchValue,
@@ -10,8 +10,19 @@ import {
 
 const Search = () => {
   const [value, setValue] = useState("");
+
   const searchValue = useSelector(getSearchValue());
+
   const dispatch = useDispatch();
+
+  const debounceValue = useDebounce(value, 250);
+
+  useEffect(() => {
+    dispatch(setSearchValue(debounceValue));
+    if (debounceValue) {
+      dispatch(setCategory({ _id: "62d82150fa9f3bce7c9a6533", name: "Все" }));
+    }
+  }, [debounceValue, dispatch]);
 
   useEffect(() => {
     if (searchValue === "") {
@@ -19,16 +30,8 @@ const Search = () => {
     }
   }, [searchValue]);
 
-  const updateSearchValue = debounce((str) => {
-    dispatch(setSearchValue(str));
-    if (str) {
-      dispatch(setCategory({ _id: "62d82150fa9f3bce7c9a6533", name: "Все" }));
-    }
-  }, 250);
-
   const handleChangeInput = (e) => {
     setValue(e.target.value);
-    updateSearchValue(e.target.value);
   };
 
   return (
