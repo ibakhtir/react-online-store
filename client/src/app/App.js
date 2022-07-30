@@ -11,7 +11,7 @@ function App() {
     <AppLoader>
       <NavBar />
       <AppRouter />
-      <ToastContainer />
+      <ToastContainer position="top-center" />
     </AppLoader>
   );
 }

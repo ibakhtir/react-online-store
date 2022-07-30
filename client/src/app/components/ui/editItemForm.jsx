@@ -6,6 +6,7 @@ import TextField from "../common/forms/textField";
 import TextAreaField from "../common/forms/textAreaField";
 import SelectField from "../common/forms/selectField";
 import MultiSelectField from "../common/forms/multiSelectField";
+import TapButton from "../common/buttons/tapButton";
 import validator from "../../utils/validator";
 import getMultiSelectOptions from "../../utils/getMultiSelectOptions";
 import { updateItem } from "../../store/items";
@@ -169,13 +170,14 @@ const EditItemForm = ({ item, onClose }) => {
             />
           </div>
         </div>
-        <button
+        <TapButton
           type="submit"
+          color="dark"
+          rest="text-warning w-100 mt-3"
           disabled={Object.keys(errors).length !== 0}
-          className="btn btn-dark text-warning w-100 mt-3"
         >
           Обновить
-        </button>
+        </TapButton>
       </form>
     )
   );

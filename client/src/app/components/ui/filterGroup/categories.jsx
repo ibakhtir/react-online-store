@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
+import scrollTo from "../../../utils/scrollTo";
 import { getCategories } from "../../../store/categories";
 import {
   getCategory,
@@ -8,7 +10,7 @@ import {
   setSearchValue
 } from "../../../store/filter";
 
-const Categories = () => {
+const Categories = ({ position }) => {
   const categories = useSelector(getCategories());
   const category = useSelector(getCategory());
 
@@ -17,6 +19,7 @@ const Categories = () => {
   const handleChangeCategory = (category) => {
     dispatch(setCategory(category));
     dispatch(setSearchValue(""));
+    scrollTo(position);
   };
 
   return (
@@ -39,6 +42,10 @@ const Categories = () => {
       </div>
     )
   );
+};
+
+Categories.propTypes = {
+  position: PropTypes.number
 };
 
 export default Categories;

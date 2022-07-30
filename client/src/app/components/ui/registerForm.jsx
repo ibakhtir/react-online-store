@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 
-import { signUp } from "../../store/users";
-import validator from "../../utils/validator";
 import TextField from "../common/forms/textField";
+import TapButton from "../common/buttons/tapButton";
+import validator from "../../utils/validator";
+import { signUp } from "../../store/users";
 
 const RegisterForm = () => {
   const [data, setData] = useState({
@@ -13,6 +14,7 @@ const RegisterForm = () => {
   });
   const [errors, setErrors] = useState({});
   const [isValid, setValid] = useState(true);
+
   const dispatch = useDispatch();
 
   const validate = useCallback(() => {
@@ -36,7 +38,6 @@ const RegisterForm = () => {
         }
       }
     };
-
     const errors = validator(data, validatorConfig);
     setErrors(errors);
     return Object.keys(errors).length === 0;
@@ -85,13 +86,14 @@ const RegisterForm = () => {
         onChange={handleChange}
         error={errors.password}
       />
-      <button
+      <TapButton
         type="submit"
+        color="warning"
+        rest="w-100 mx-auto mt-3"
         disabled={Object.keys(errors).length !== 0}
-        className="btn btn-warning w-100 mx-auto mt-3"
       >
         Создать
-      </button>
+      </TapButton>
     </form>
   );
 };

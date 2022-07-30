@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { signOut } from "../store/users";
+import Preloader from "../components/common/preloader";
 
 const LogOut = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ const LogOut = () => {
     dispatch(signOut());
   }, [dispatch]);
 
-  return "Loading...";
+  return <Preloader color="warning" />;
 };
 
 export default LogOut;

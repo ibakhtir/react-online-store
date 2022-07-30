@@ -19,8 +19,10 @@ import Search from "./filterGroup/search";
 const NavBar = () => {
   const [isOpen, setOpen] = useState(false);
   const location = useLocation();
+
   const isLoggedIn = useSelector(getIsLoggedIn());
   const cartItems = useSelector(getCartItems());
+
   const totalCount = calcTotalCount(cartItems);
 
   useEffect(() => {

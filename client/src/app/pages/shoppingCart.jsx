@@ -3,16 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getCartItems, getTotalPrice, clearItems } from "../store/cart";
 import { calcTotalCount } from "../utils/calculations";
+import TapButton from "../components/common/buttons/tapButton";
 import Badge from "../components/common/badge";
-import BackButton from "../components/common/backButton";
+import BackButton from "../components/common/buttons/backButton";
 import CartItem from "../components/ui/cartItem";
 import CartEmpty from "../components/ui/cartEmpty";
 
 const ShoppingCart = () => {
-  const dispatch = useDispatch();
   const cartItems = useSelector(getCartItems());
   const totalPrice = useSelector(getTotalPrice());
   const totalCount = calcTotalCount(cartItems);
+
+  const dispatch = useDispatch();
 
   const handleClickClear = () => {
     dispatch(clearItems());
@@ -55,9 +57,10 @@ const ShoppingCart = () => {
               />
             </p>
             <div className="col-md-6 text-center">
-              <button type="button" className="btn btn-warning w-100">
-                Оплатить <i className="bi bi-credit-card ms-1" />
-              </button>
+              <TapButton type="button" color="warning" rest="w-100">
+                Оплатить
+                <i className="bi bi-credit-card ms-2" />
+              </TapButton>
             </div>
           </div>
         </div>

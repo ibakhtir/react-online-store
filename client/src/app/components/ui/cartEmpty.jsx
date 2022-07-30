@@ -1,7 +1,7 @@
 import React from "react";
 
 import emptyCartImg from "../../assets/empty-cart.png";
-import BackButton from "../common/backButton";
+import BackButton from "../common/buttons/backButton";
 
 const CartEmpty = () => (
   <div className="container my-4">

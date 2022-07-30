@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Table from "../common/table/table";
 import Modal from "../common/modal";
 import HiddenContent from "../common/hiddenContent";
+import TapButton from "../common/buttons/tapButton";
 
 const ItemsTable = ({ items, onRemove }) => {
   const columns = [
@@ -77,13 +78,14 @@ const ItemsTable = ({ items, onRemove }) => {
       content: (item) => (
         <div className="d-flex justify-content-center">
           <Modal item={item} />
-          <button
+          <TapButton
             type="button"
-            className="btn btn-danger btn-sm ms-2"
+            color="danger"
+            rest="btn-sm ms-2"
             onClick={() => onRemove(item._id)}
           >
             <i className="bi bi-trash" />
-          </button>
+          </TapButton>
         </div>
       )
     }

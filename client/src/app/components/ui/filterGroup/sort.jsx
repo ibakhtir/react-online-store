@@ -13,7 +13,9 @@ const sortList = [
 const Sort = () => {
   const [isOpen, setOpen] = useState(false);
   const sortRef = useRef(null);
+
   const { name } = useSelector(getSortProperties());
+
   const dispatch = useDispatch();
 
   useOnClickOutside(sortRef, () => setOpen(false));

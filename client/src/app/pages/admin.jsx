@@ -10,7 +10,7 @@ import { getItems, getItemsLoadingStatus, removeItem } from "../store/items";
 import { getTableSortProperties } from "../store/filter";
 import { getItemAlert, setItemAlert } from "../store/alerts";
 
-const pageSize = 4;
+const pageSize = 6;
 
 const Admin = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,24 +31,27 @@ const Admin = () => {
         dispatch(setItemAlert({}));
       }, 3000);
     };
+
     if (Object.keys(alert).length > 0) {
       handleShowAlert();
     }
   }, [alert, dispatch]);
 
   const sortedItems = orderBy(items, [path], [order]);
+  const itemsLength = items ? items.length : 0;
 
   const currentItems = useMemo(() => {
     const firstPageIndex = (currentPage - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
+
     return !isLoading && sortedItems.slice(firstPageIndex, lastPageIndex);
   }, [currentPage, isLoading, sortedItems]);
 
   useEffect(() => {
-    if (!isLoading && items.length <= pageSize) {
+    if (!isLoading && itemsLength <= pageSize) {
       setCurrentPage(1);
     }
-  }, [items, isLoading]);
+  }, [isLoading, itemsLength]);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -68,7 +71,7 @@ const Admin = () => {
         <>
           <ItemsTable items={currentItems} onRemove={handleRemoveItem} />
           <Pagination
-            totalCount={items.length}
+            totalCount={itemsLength}
             pageSize={pageSize}
             currentPage={currentPage}
             onPageChange={handlePageChange}

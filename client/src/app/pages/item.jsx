@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
+import TapButton from "../components/common/buttons/tapButton";
 import Comments from "../components/ui/comments";
 import ItemInfo from "../components/ui/itemInfo";
 import { getItemById } from "../store/items";
@@ -35,13 +36,14 @@ const Item = () => {
             />
             <h4 className="mt-2">{item.name}</h4>
             <ItemInfo item={item} />
-            <button
+            <TapButton
               type="button"
-              className="btn btn-dark text-warning w-75"
+              color="dark"
+              rest="text-warning w-75"
               onClick={handleClick}
             >
               Добавить
-            </button>
+            </TapButton>
           </div>
           <div className="col-md-8">
             <Comments />

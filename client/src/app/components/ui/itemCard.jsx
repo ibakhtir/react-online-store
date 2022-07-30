@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
+import TapButton from "../common/buttons/tapButton";
 import Badge from "../common/badge";
 import Counter from "../common/counter";
 import { addItem } from "../../store/cart";
@@ -48,13 +49,14 @@ const ItemCard = ({ item }) => {
         </div>
         <p className="fst-italic p-2">{description}</p>
         <div className="d-flex justify-content-around mt-auto mb-2">
-          <button
+          <TapButton
             type="button"
-            className="btn btn-dark text-warning w-50"
+            color="dark"
+            rest="text-warning w-50"
             onClick={handleClick}
           >
             Добавить
-          </button>
+          </TapButton>
           <Counter
             onPlus={handleIncrement}
             onMinus={handleDecrement}

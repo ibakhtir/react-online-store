@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import EditItemForm from "../ui/editItemForm";
 import AddItemForm from "../ui/addItemForm";
 
+import TapButton from "./buttons/tapButton";
+
 const Modal = ({ item }) => {
   const [showModal, setShow] = useState(false);
 
@@ -13,18 +15,19 @@ const Modal = ({ item }) => {
   return (
     <>
       {item ? (
-        <button
+        <TapButton
           type="button"
-          className="btn btn-warning btn-sm"
+          color="warning"
+          rest="btn-sm"
           onClick={handleShow}
         >
           <i className="bi bi-pencil" />
-        </button>
+        </TapButton>
       ) : (
-        <button type="button" className="btn btn-success" onClick={handleShow}>
+        <TapButton type="button" color="success" onClick={handleShow}>
           <i className="bi bi-plus-circle-fill me-2" />
-          <span>Добавить новый товар</span>
-        </button>
+          Добавить новый товар
+        </TapButton>
       )}
       <div className={`modal fade ${showModal ? "show d-block" : "d-none"}`}>
         <div className="modal-dialog modal-dialog-scrollable">

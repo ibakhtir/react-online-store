@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
+import TapButton from "../buttons/tapButton";
 import TextAreaField from "../forms/textAreaField";
 import RadioField from "../forms/radioField";
 import validator from "../../../utils/validator";
@@ -98,12 +99,9 @@ const AddCommentForm = () => {
                 onChange={handleChange}
               />
               <div className="d-flex justify-content-end">
-                <button
-                  type="submit"
-                  className="btn btn-dark text-warning mb-1"
-                >
+                <TapButton type="submit" color="dark" rest="text-warning mb-1">
                   Опубликовать
-                </button>
+                </TapButton>
               </div>
             </fieldset>
           </form>
